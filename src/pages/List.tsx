@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+
 import { CardProperty } from "../components/CardProperty";
 import { Property } from "../models/Property";
+import { fetchNormal } from "../utils/fetch";
 
 interface ListProps {
     className?: string;
@@ -10,7 +12,9 @@ interface ListProps {
 export const List = (props: ListProps) => {
     const [properties, setProperties] = useState<Property[]>([]);
     useEffect(() => {
-        setProperties(getAllProperties());
+        fetchNormal<Property[]>("GET", `/exposes`).then((response) => {
+            setProperties(response.data);
+        });
     }, []);
     return (
         <Wrapper>
@@ -20,20 +24,6 @@ export const List = (props: ListProps) => {
         </Wrapper>
     );
 };
-
-function getAllProperties() {
-    return [
-        {
-            title: "Property A",
-        },
-        {
-            title: "Property B",
-        },
-        {
-            title: "Property C",
-        },
-    ] as Property[];
-}
 
 const Wrapper = styled.div`
     display: flex;
