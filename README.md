@@ -14,10 +14,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Develop
 
--   Copy and rename `.env-example` to `.env` and adjust values
+-   Copy `.env-example` file and pase as new files:
+    -   `.env` (for `npm start`)
+    -   `.env.prod-api` (for `npm run start:prod-api`)
+-   adjust values in these files
+
+if you want to use local API (API Endpoint in `.env` file):
 
 ```
 npm start
+```
+
+if you want to use public API (API Endpoint in `env.prod-api` file):
+
+```
+npm run start:prod-api
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
