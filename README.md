@@ -14,6 +14,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Develop
 
+-   Copy and rename `.env-example` to `.env` and adjust values
+
 ```
 npm start
 ```
