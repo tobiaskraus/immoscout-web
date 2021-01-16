@@ -62,7 +62,7 @@ const OtherRows = (props: OtherRowsProps) => {
     return (
         <>
             {rows.map(([key, value]) => (
-                <Row>
+                <Row key={key}>
                     <Label>{key}</Label>
                     <Value>{JSON.stringify(value)}</Value>
                 </Row>
