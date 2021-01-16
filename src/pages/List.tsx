@@ -12,7 +12,7 @@ interface ListProps {
 export const List = (props: ListProps) => {
     const [properties, setProperties] = useState<Property[]>([]);
     useEffect(() => {
-        fetchNormal<Property[]>("GET", `/exposes`).then((response) => {
+        fetchNormal<Property[]>("GET", `/properties`).then((response) => {
             setProperties(response.data);
         });
     }, []);
