@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { NavLink } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { globalStyles } from "../styles/globalStyles";
 import Icon from "./Icon";
 
