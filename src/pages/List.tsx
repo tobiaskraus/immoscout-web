@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { CardProperty } from "../components/CardProperty";
 import { Property } from "../models/Property";
+import { MainPage } from "../templates/MainPage";
 import { fetchNormal } from "../utils/fetch";
 
 interface ListProps {
@@ -17,11 +18,13 @@ export const List = (props: ListProps) => {
         });
     }, []);
     return (
-        <Wrapper>
-            {properties.map((property) => (
-                <CardProperty key={property.title} property={property} />
-            ))}
-        </Wrapper>
+        <MainPage>
+            <Wrapper>
+                {properties.map((property) => (
+                    <CardProperty key={property._id} property={property} />
+                ))}
+            </Wrapper>
+        </MainPage>
     );
 };
 

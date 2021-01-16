@@ -1,4 +1,5 @@
 export interface Property {
+    _id: string;
     title: string;
     scout_id: string;
     street: string;
