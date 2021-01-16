@@ -10,4 +10,5 @@ export const globalStyles = {
         textLight: "#747474",
         text: "333",
     },
+    shadow: "1px 1px 5px rgba(0, 0, 0, 0.1)",
 };

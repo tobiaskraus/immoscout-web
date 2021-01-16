@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { Property } from "../models/Property";
 import { globalStyles } from "../styles/globalStyles";
@@ -8,7 +8,7 @@ interface CardPropertyProps {
     property: Property;
 }
 
-export const CardProperty = (props: CardPropertyProps) => {
+export const CardProperty: FunctionComponent<CardPropertyProps> = (props) => {
     return (
         <Card>
             <h2>{props.property.title}</h2>
@@ -34,7 +34,7 @@ const Card = styled.div`
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 10px 20px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: ${globalStyles.shadow};
 `;
 
 const Rows = (props: CardPropertyProps) => (
