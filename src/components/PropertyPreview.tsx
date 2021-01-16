@@ -1,6 +1,8 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useCallback, useState } from "react";
 import styled from "styled-components";
 import { Property } from "../models/Property";
+import { globalStyles } from "../styles/globalStyles";
+import ImageGallery from "./images/ImageGallery";
 import MainRows from "./propertyDetailRows/MainRows";
 import OtherRows from "./propertyDetailRows/OtherRows";
 
@@ -11,11 +13,39 @@ interface PropertyPreviewProps {
 }
 
 const PropertyPreview: FunctionComponent<PropertyPreviewProps> = (props) => {
+    const [isGalleryBig, setGalleryBig] = useState(false);
+
+    const shrinkGallery = useCallback(() => {
+        setGalleryBig(false);
+    }, []);
+
+    const extendGallery = useCallback(() => {
+        setGalleryBig(true);
+    }, []);
+
     return (
         <ModalWrapper onClick={props.onClose}>
-            <Modal>
+            <Modal onClick={(e) => e.stopPropagation()}>
                 <h2>{props.property.title}</h2>
                 <MainRows property={props.property} />
+                <hr />
+                <div>
+                    <GalleryOptions>
+                        <button
+                            disabled={!isGalleryBig}
+                            onClick={shrinkGallery}
+                        >
+                            small
+                        </button>
+                        <button disabled={isGalleryBig} onClick={extendGallery}>
+                            big
+                        </button>
+                    </GalleryOptions>
+                    <ImageGallery
+                        big={isGalleryBig}
+                        property={props.property}
+                    />
+                </div>
                 <hr />
                 <OtherRows
                     property={props.property}
@@ -57,5 +87,12 @@ const Modal = styled.div`
     max-width: calc(100vw - 60px);
     border-radius: 4px;
     background-color: white;
-    padding: 20px 30px;
+    padding: 0 20px 30px 20px;
+`;
+
+const GalleryOptions = styled.div`
+    position: sticky;
+    background-color: ${globalStyles.colors.grayLight2};
+    top: 0;
+    padding: 10px 0;
 `;
