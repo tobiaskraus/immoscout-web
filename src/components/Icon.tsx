@@ -13,7 +13,7 @@ interface IconProps {
 }
 
 const defaultProps: Partial<IconProps> = {
-    color: "#000000",
+    color: "currentColor",
     size: 24,
 };
 
