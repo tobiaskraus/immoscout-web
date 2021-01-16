@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import { NavLink } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { globalStyles } from "../styles/globalStyles";
 import Icon from "./Icon";
@@ -14,11 +15,15 @@ export const Header: FunctionComponent = () => {
                     </Title>
                 </HeaderSection>
                 <HeaderSection>
-                    <Tab active={false}>
-                        <Icon icon="grid" />
+                    <Tab>
+                        <NavLink to="/list" activeClassName="active">
+                            <Icon icon="grid" />
+                        </NavLink>
                     </Tab>
-                    <Tab active={true}>
-                        <Icon icon="table" />
+                    <Tab>
+                        <NavLink to="/table" activeClassName="active">
+                            <Icon icon="table" />
+                        </NavLink>
                     </Tab>
                 </HeaderSection>
             </Wrapper>
@@ -69,19 +74,19 @@ const TitlePart1 = styled.span`
     color: ${globalStyles.colors.primary};
 `;
 
-const Tab = styled.div<{ active: boolean }>`
-    height: ${headerHeight}px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
-    cursor: pointer;
-    ${(props) =>
-        props.active &&
-        css`
+const Tab = styled.div`
+    > a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 10px;
+        padding-right: 10px;
+        height: ${headerHeight}px;
+        color: inherit;
+        text-decoration: none;
+        &.active {
             cursor: default;
-            color: ${globalStyles.colors.gray};
             border-bottom: 3px solid ${globalStyles.colors.primary};
-        `}
+        }
+    }
 `;
