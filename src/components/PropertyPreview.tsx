@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from "react";
+import React, { FunctionComponent, useCallback, useRef, useState } from "react";
 import styled from "styled-components";
 import { Property } from "../models/Property";
 import { globalStyles } from "../styles/globalStyles";
@@ -14,9 +14,15 @@ interface PropertyPreviewProps {
 
 const PropertyPreview: FunctionComponent<PropertyPreviewProps> = (props) => {
     const [isGalleryBig, setGalleryBig] = useState(false);
+    const modalRef = useRef<HTMLDivElement>(null);
+    const galleryRef = useRef<HTMLDivElement>(null);
 
     const shrinkGallery = useCallback(() => {
         setGalleryBig(false);
+        // scroll to top, where gallery starts
+        if (modalRef.current && galleryRef.current) {
+            modalRef.current.scrollTop = galleryRef.current.offsetTop;
+        }
     }, []);
 
     const extendGallery = useCallback(() => {
@@ -25,11 +31,11 @@ const PropertyPreview: FunctionComponent<PropertyPreviewProps> = (props) => {
 
     return (
         <ModalWrapper onClick={props.onClose}>
-            <Modal onClick={(e) => e.stopPropagation()}>
+            <Modal onClick={(e) => e.stopPropagation()} ref={modalRef}>
                 <h2>{props.property.title}</h2>
                 <MainRows property={props.property} />
                 <hr />
-                <div>
+                <div ref={galleryRef}>
                     <GalleryOptions>
                         <button
                             disabled={!isGalleryBig}
