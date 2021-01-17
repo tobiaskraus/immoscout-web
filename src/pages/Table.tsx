@@ -23,42 +23,13 @@ export const Table: FunctionComponent = () => {
     return (
         <MainPage>
             <TableElement>
-                <thead>
-                    <tr>
-                        <th>Scout Id</th>
-                        <th>Title</th>
-                        <th>Area</th>
-                        <th>m²</th>
-                        <th>
-                            Price
-                            <br />
-                            (cold)
-                        </th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {properties.map((property) => (
-                        <TrElement
-                            key={property._id}
-                            onClick={() => setMarkedRow(property._id)}
-                            marked={markedRow === property._id}
-                        >
-                            <td>{property.scout_id}</td>
-                            <td>{property.title}</td>
-                            <td>{property.city_region}</td>
-                            <td>{property.sqm || property.sqm_wohnflaeche}</td>
-                            <td>{property.price_net}</td>
-                            <td>
-                                <Button
-                                    onClick={() => onPreviewClick(property)}
-                                >
-                                    Details
-                                </Button>
-                            </td>
-                        </TrElement>
-                    ))}
-                </tbody>
+                <TableHead />
+                <TableBody
+                    properties={properties}
+                    markedRow={markedRow}
+                    setMarkedRow={setMarkedRow}
+                    onPreviewClick={onPreviewClick}
+                />
             </TableElement>
             {preview && (
                 <PropertyPreview property={preview} onClose={onPreviewClose} />
@@ -78,6 +49,53 @@ const TableElement = styled.table`
         padding: 2px 8px;
     }
 `;
+
+const TableHead: FunctionComponent = () => (
+    <thead>
+        <tr>
+            <th>Scout Id</th>
+            <th>Title</th>
+            <th>Area</th>
+            <th>m²</th>
+            <th>
+                Price
+                <br />
+                (cold)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+);
+
+interface TableBodyProps {
+    properties: Property[];
+    markedRow: string | null;
+    setMarkedRow: (id: string) => void;
+    onPreviewClick: (property: Property) => void;
+}
+
+const TableBody: FunctionComponent<TableBodyProps> = (props) => (
+    <tbody>
+        {props.properties.map((property) => (
+            <TrElement
+                key={property._id}
+                onClick={() => props.setMarkedRow(property._id)}
+                marked={props.markedRow === property._id}
+            >
+                <td>{property.scout_id}</td>
+                <td>{property.title}</td>
+                <td>{property.city_region}</td>
+                <td>{property.sqm || property.sqm_wohnflaeche}</td>
+                <td>{property.price_net}</td>
+                <td>
+                    <Button onClick={() => props.onPreviewClick(property)}>
+                        Details
+                    </Button>
+                </td>
+            </TrElement>
+        ))}
+    </tbody>
+);
 
 const TrElement = styled.tr<{ marked: boolean }>`
     background-color: ${(props) =>
