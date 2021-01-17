@@ -18,6 +18,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.noscroll {
+    overflow: hidden;
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;

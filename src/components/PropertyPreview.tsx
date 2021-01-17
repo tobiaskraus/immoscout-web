@@ -1,7 +1,17 @@
-import React, { FunctionComponent, useCallback, useRef, useState } from "react";
+import React, {
+    FunctionComponent,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 import styled from "styled-components";
 import { Property } from "../models/Property";
 import { globalStyles } from "../styles/globalStyles";
+import {
+    disablePageScrolling,
+    enablePageScrolling,
+} from "../utils/disableScrolling";
 import ImageGallery from "./images/ImageGallery";
 import MainRows from "./propertyDetailRows/MainRows";
 import OtherRows from "./propertyDetailRows/OtherRows";
@@ -27,6 +37,13 @@ const PropertyPreview: FunctionComponent<PropertyPreviewProps> = (props) => {
 
     const extendGallery = useCallback(() => {
         setGalleryBig(true);
+    }, []);
+
+    useEffect(() => {
+        disablePageScrolling();
+        return () => {
+            enablePageScrolling();
+        };
     }, []);
 
     return (
@@ -71,24 +88,20 @@ export default PropertyPreview;
 
 const ModalWrapper = styled.div`
     position: fixed;
-    /* position: absolute; */
     top: 0;
     left: 0;
     height: 100vh;
     width: 100vw;
-    /* bottom: 0; */
-    /* right: 0; */
+    padding: 35px;
     background-color: rgba(0, 0, 0, 0.2);
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
-    /* overflow-y: auto; */
-    /* max-height: 100vh; */
+    overflow-y: auto;
 `;
 
 const Modal = styled.div`
     width: 800px;
-    max-height: 90vh;
     overflow-y: auto;
     max-width: calc(100vw - 60px);
     border-radius: 4px;
