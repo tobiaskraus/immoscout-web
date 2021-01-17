@@ -10,6 +10,7 @@ import PropertyPreview from "../components/PropertyPreview";
 export const Table: FunctionComponent = () => {
     const { properties } = useStore();
     const [preview, setPreview] = useState<Property | null>(null);
+    const [markedRow, setMarkedRow] = useState<Property["_id"] | null>(null);
 
     const onPreviewClick = useCallback((property: Property) => {
         setPreview(property);
@@ -38,7 +39,11 @@ export const Table: FunctionComponent = () => {
                 </thead>
                 <tbody>
                     {properties.map((property) => (
-                        <tr key={property._id}>
+                        <TrElement
+                            key={property._id}
+                            onClick={() => setMarkedRow(property._id)}
+                            marked={markedRow === property._id}
+                        >
                             <td>{property.scout_id}</td>
                             <td>{property.title}</td>
                             <td>{property.city_region}</td>
@@ -51,7 +56,7 @@ export const Table: FunctionComponent = () => {
                                     Details
                                 </Button>
                             </td>
-                        </tr>
+                        </TrElement>
                     ))}
                 </tbody>
             </TableElement>
@@ -67,15 +72,19 @@ const TableElement = styled.table`
     width: 100%;
     background-color: white;
     font-size: 14px;
-    tr {
-        :hover {
-            background-color: ${globalStyles.colors.grayLight2};
-        }
-    }
     td,
     th {
         border: 1px solid ${globalStyles.colors.gray};
         padding: 2px 8px;
+    }
+`;
+
+const TrElement = styled.tr<{ marked: boolean }>`
+    background-color: ${(props) =>
+        props.marked ? globalStyles.colors.primaryLight : undefined};
+    :hover {
+        background-color: ${(props) =>
+            props.marked ? undefined : globalStyles.colors.grayLight2};
     }
 `;
 

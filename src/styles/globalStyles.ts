@@ -6,6 +6,7 @@ export const globalStyles = {
         grayDark: "#333333",
         primary: "#00ffd0",
         secondary: "#f58400",
+        primaryLight: "#b3fff1",
 
         textLight: "#747474",
         text: "333",
