@@ -1,3 +1,6 @@
+import { Upload } from "./Upload";
+import { Image } from "./Image";
+
 export interface Property {
     _id: string;
     title: string;
@@ -14,7 +17,9 @@ export interface Property {
     sqm_nutzflaeche: string;
     sqm_wohnflaeche: string;
     /** urls */
-    images: string[];
+    images: Image[];
+    floor: number;
+    floorTotal: number;
     construction_year: string;
     object_condition: string;
     heating_type: string;
@@ -33,4 +38,9 @@ export interface Property {
     quickcheck_average_min: string;
     quickcheck_average_max: string;
     quickcheck_max: string;
+
+    // Extra (not from scraping)
+    uploads: Upload[];
+    created_at: Date;
+    modifiedAt: Date;
 }

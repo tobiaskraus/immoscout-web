@@ -15,13 +15,13 @@ const ImageGallery: FunctionComponent<ImageGalleryProps> = (props) => {
     ) : props.big ? (
         <GalleryBig>
             {props.property.images.map((img) => (
-                <img src={img} />
+                <img src={img.url} />
             ))}
         </GalleryBig>
     ) : (
         <GallerySmall>
             {props.property.images.map((img) => (
-                <img src={img} />
+                <img src={img.url} />
             ))}
         </GallerySmall>
     );
