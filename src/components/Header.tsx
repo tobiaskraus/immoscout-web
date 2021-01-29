@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { globalStyles } from "../styles/globalStyles";
+import APIToggle from "./APIToggle";
 import Icon from "./Icon";
 
 export const Header: FunctionComponent = () => {
@@ -13,6 +14,9 @@ export const Header: FunctionComponent = () => {
                         <TitlePart1>TK</TitlePart1>
                         <span>ImmoScout</span>
                     </Title>
+                </HeaderSection>
+                <HeaderSection>
+                    <APIToggle />
                 </HeaderSection>
                 <HeaderSection>
                     <Tab>

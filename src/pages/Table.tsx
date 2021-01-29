@@ -1,14 +1,19 @@
-import React, { FunctionComponent, useCallback, useState } from "react";
+import React, {
+    FunctionComponent,
+    useCallback,
+    useContext,
+    useState,
+} from "react";
 import styled from "styled-components";
 
 import { MainPage } from "../templates/MainPage";
-import { useStore } from "../store";
 import { globalStyles } from "../styles/globalStyles";
 import { Property } from "../models/Property";
 import PropertyPreview from "../components/PropertyPreview";
+import { StoreContext } from "../StoreProvider";
 
 export const Table: FunctionComponent = () => {
-    const { properties } = useStore();
+    const { properties } = useContext(StoreContext);
     const [preview, setPreview] = useState<Property | null>(null);
     const [markedRow, setMarkedRow] = useState<Property["_id"] | null>(null);
 

@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import styled from "styled-components";
 
 import { CardProperty } from "../components/CardProperty";
+import { StoreContext } from "../StoreProvider";
 import { MainPage } from "../templates/MainPage";
-import { useStore } from "../store";
 
 export const List: FunctionComponent = () => {
-    const { properties } = useStore();
+    const { properties } = useContext(StoreContext);
     return (
         <MainPage>
             <Wrapper>
